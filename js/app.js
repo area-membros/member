@@ -4,6 +4,9 @@ Local: /js/app.js
 Descrição: PWA com popup de instalação controlado + fallback universal
 */
 
+console.log('APP.JS ATUALIZADO');
+
+//
 const modal = document.getElementById('installModal');
 const btnInstall = document.getElementById('installBtn');
 const btnClose = document.getElementById('installClose');
@@ -93,3 +96,4 @@ if (btnInstall) {
     alert('Para instalar: toque no menu ⋮ do navegador e escolha "Instalar app".');
   });
 }
+
