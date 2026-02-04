@@ -3,6 +3,17 @@ Arquivo: app.js
 Local: /js/app.js
 Descrição: Registro do SW + popup de instalação PWA controlado por você
 */
+console.log('[PWA] app.js carregou');
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  console.log('[PWA] beforeinstallprompt DISPAROU ✅');
+});
+window.addEventListener('appinstalled', () => {
+  console.log('[PWA] appinstalled ✅');
+});
+
+
+//aqui termina
 
 const modal = document.getElementById('installModal');
 const btnInstall = document.getElementById('installBtn');
@@ -99,3 +110,4 @@ if (btnInstall) {
     deferredPrompt = null;
   });
 }
+
