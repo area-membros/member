@@ -1,14 +1,15 @@
-const CACHE_NAME = "membros-v1";
+const CACHE_NAME = "membros-v2";
+
+// “Shell” do app (o que precisa pra interface abrir)
 const SHELL = [
   "/",
   "/index.html",
   "/app/",
   "/app/index.html",
   "/manifest.webmanifest",
+  "/service-worker.js",
   "/assets/css/styles.css",
   "/assets/js/pwa.js",
-  "/assets/js/auth.js",
-  "/assets/js/main.js",
   "/assets/js/app.js",
   "/assets/data/content.json"
 ];
@@ -23,7 +24,9 @@ self.addEventListener("install", (event) => {
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.keys().then((keys) =>
-      Promise.all(keys.map((k) => (k === CACHE_NAME ? null : caches.delete(k))))
+      Promise.all(
+        keys.map((k) => (k === CACHE_NAME ? null : caches.delete(k)))
+      )
     )
   );
   self.clients.claim();
@@ -33,10 +36,9 @@ self.addEventListener("fetch", (event) => {
   const req = event.request;
   const url = new URL(req.url);
 
-  // só GET
   if (req.method !== "GET") return;
 
-  // cache-first pro shell
+  // Cache-first pro shell e assets
   if (SHELL.includes(url.pathname) || url.pathname.startsWith("/assets/")) {
     event.respondWith(
       caches.match(req).then((cached) => cached || fetch(req))
@@ -44,7 +46,7 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  // network-first pros deliverables (PDF/vídeo)
+  // Network-first pros deliverables (PDF/vídeo)
   if (url.pathname.startsWith("/deliverables/")) {
     event.respondWith(
       fetch(req)
