@@ -3,18 +3,9 @@
     {
       "id": "pdf-01",
       "type": "pdf",
-      "title": "Seu PDF 01 — Exemplo",
-      "description": "Clique para abrir ou baixar.",
+      "title": "Módulo 01 — Introdução",
+      "description": "Material em PDF para abrir e baixar.",
+      "category": "Comece por aqui",
       "tag": "PDF",
-      "url": "/deliverables/exemplo.pdf"
-    },
-    {
-      "id": "video-01",
-      "type": "video",
-      "title": "Vídeo 01 — Exemplo",
-      "description": "Vídeo de apoio (opcional).",
-      "tag": "Aula",
-      "url": "/deliverables/exemplo-video.mp4"
-    }
-  ]
-}
+      "cover": "/deliverables/covers/modulo-01.jpg",
+      "url": "/deliverables/modulo-01.pdf"
