@@ -7,52 +7,11 @@
   <title>Área de Membros</title>
 
   <link rel="manifest" href="/manifest.webmanifest" />
-  <link rel="stylesheet" href="/assets/css/styles.css" />
-
-  <!-- Netlify Identity (login pronto sem backend) -->
-  <script defer src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-
   <script defer src="/assets/js/pwa.js"></script>
-  <script defer src="/assets/js/auth.js"></script>
-  <script defer src="/assets/js/main.js"></script>
+
+  <meta http-equiv="refresh" content="0; url=/app/" />
 </head>
-<body class="bg">
-  <main class="container">
-    <header class="hero">
-      <div class="badge">PWA • 100% Mobile</div>
-      <h1>Área de Membros</h1>
-      <p class="subtitle">Acesse seus PDFs, assista vídeos e instale como aplicativo no celular.</p>
-    </header>
-
-    <section class="card">
-      <h2>Entrar</h2>
-      <p class="muted">Use seu e-mail para acessar. (Cadastro pode ser por convite no Netlify.)</p>
-
-      <div class="actions">
-        <button class="btn primary" id="btnLogin">Fazer login</button>
-        <button class="btn ghost" id="btnLogout" hidden>Sair</button>
-      </div>
-
-      <div class="divider"></div>
-
-      <h2>Instalar como app</h2>
-      <p class="muted">Se aparecer a opção, você instala sem Play Store.</p>
-      <button class="btn" id="btnInstall" hidden>Instalar App</button>
-
-      <p class="tiny muted" id="installHint"></p>
-    </section>
-
-    <section class="card">
-      <h2>Acesso rápido</h2>
-      <div class="actions">
-        <a class="btn link" href="/app/">Ir para a Área de Membros</a>
-      </div>
-      <p class="tiny muted">Se você não estiver logado, você volta pra tela de login.</p>
-    </section>
-
-    <footer class="footer">
-      <span class="tiny muted">Versão inicial • Feita para smartphone</span>
-    </footer>
-  </main>
+<body>
+  <noscript>Abra: /app/</noscript>
 </body>
 </html>
