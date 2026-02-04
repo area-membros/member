@@ -9,10 +9,7 @@
   <link rel="manifest" href="/manifest.webmanifest" />
   <link rel="stylesheet" href="/assets/css/styles.css" />
 
-  <script defer src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-
   <script defer src="/assets/js/pwa.js"></script>
-  <script defer src="/assets/js/auth.js"></script>
   <script defer src="/assets/js/app.js"></script>
 </head>
 <body class="bg">
@@ -21,11 +18,11 @@
       <div>
         <div class="badge">Área de Membros</div>
         <h1 class="h1">Seus entregáveis</h1>
-        <p class="subtitle" id="userLine">Carregando...</p>
+        <p class="subtitle">Acesse PDFs e vídeos. (Modo teste: acesso liberado)</p>
       </div>
 
       <div class="topbar-actions">
-        <button class="btn ghost" id="btnLogout">Sair</button>
+        <button class="btn" id="btnInstall" hidden>Instalar App</button>
       </div>
     </header>
 
@@ -34,12 +31,10 @@
         <input class="input" id="search" placeholder="Buscar PDF / vídeo..." />
         <button class="btn" id="btnRefresh">Atualizar</button>
       </div>
-      <p class="tiny muted">Dica: você edita a lista em <code>/assets/data/content.json</code>.</p>
+      <p class="tiny muted">Você edita a lista em <code>/assets/data/content.json</code>.</p>
     </section>
 
-    <section class="grid" id="contentGrid">
-      <!-- cartões entram via JS -->
-    </section>
+    <section class="grid" id="contentGrid"></section>
 
     <section class="card" id="viewerCard" hidden>
       <div class="row space-between">
@@ -66,7 +61,7 @@
     </section>
 
     <footer class="footer">
-      <span class="tiny muted">Offline: o app abre sem internet, mas PDFs/vídeos dependem de conexão (por padrão).</span>
+      <span class="tiny muted">PWA • Mobile-first • Teste liberado</span>
     </footer>
   </main>
 </body>
