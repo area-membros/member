@@ -4,7 +4,7 @@ Local: /service-worker.js
 Descrição: Cache para funcionamento offline (PWA)
 */
 
-const CACHE_NAME = 'tribo-de-cristo-v1';
+const CACHE_NAME = 'tribo-de-cristo-v2';
 
 const FILES_TO_CACHE = [
   '/',
@@ -29,4 +29,5 @@ self.addEventListener('fetch', event => {
       return response || fetch(event.request);
     })
   );
+
 });
