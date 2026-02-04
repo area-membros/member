@@ -9,13 +9,6 @@ function el(tag, attrs = {}, children = []) {
   return n;
 }
 
-function setUserLine(user) {
-  const p = document.getElementById("userLine");
-  if (!p) return;
-  const email = user?.email || "usuário";
-  p.textContent = `Logado como: ${email}`;
-}
-
 async function fetchContent() {
   const res = await fetch("/assets/data/content.json", { cache: "no-store" });
   if (!res.ok) throw new Error("Falha ao carregar conteúdo");
@@ -31,7 +24,7 @@ function renderList(items) {
     const desc = el("p", { class: "item-desc" }, [item.description || ""]);
 
     const meta = el("div", { class: "item-meta" }, [
-      el("span", { class: "pill" }, [item.type.toUpperCase()]),
+      el("span", { class: "pill" }, [String(item.type || "").toUpperCase()]),
       item.tag ? el("span", { class: "pill" }, [item.tag]) : null,
     ].filter(Boolean));
 
@@ -74,7 +67,7 @@ function openViewer(item) {
 
   if (item.type === "pdf") {
     pdfBox.hidden = false;
-    pdfFrame.src = item.url; // abre no iframe
+    pdfFrame.src = item.url;
     btnDownloadPdf.href = item.url;
     btnOpenPdf.href = item.url;
   } else if (item.type === "video") {
@@ -83,7 +76,6 @@ function openViewer(item) {
     btnOpenVideo.href = item.url;
   }
 
-  // scroll para o viewer
   viewerCard.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
@@ -99,14 +91,6 @@ function closeViewer() {
 }
 
 (async () => {
-  await window.__AUTH__.initAuth();
-  window.__AUTH__.requireLoginOnAppPage();
-
-  const user = window.netlifyIdentity.currentUser();
-  setUserLine(user);
-
-  window.__AUTH__.wireAuthButtons();
-
   const btnClose = document.getElementById("btnCloseViewer");
   btnClose.addEventListener("click", closeViewer);
 
