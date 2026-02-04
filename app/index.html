@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b1220" />
+  <title>Membros • Conteúdos</title>
+
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+
+  <script defer src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+  <script defer src="/assets/js/pwa.js"></script>
+  <script defer src="/assets/js/auth.js"></script>
+  <script defer src="/assets/js/app.js"></script>
+</head>
+<body class="bg">
+  <main class="container">
+    <header class="topbar">
+      <div>
+        <div class="badge">Área de Membros</div>
+        <h1 class="h1">Seus entregáveis</h1>
+        <p class="subtitle" id="userLine">Carregando...</p>
+      </div>
+
+      <div class="topbar-actions">
+        <button class="btn ghost" id="btnLogout">Sair</button>
+      </div>
+    </header>
+
+    <section class="card">
+      <div class="row">
+        <input class="input" id="search" placeholder="Buscar PDF / vídeo..." />
+        <button class="btn" id="btnRefresh">Atualizar</button>
+      </div>
+      <p class="tiny muted">Dica: você edita a lista em <code>/assets/data/content.json</code>.</p>
+    </section>
+
+    <section class="grid" id="contentGrid">
+      <!-- cartões entram via JS -->
+    </section>
+
+    <section class="card" id="viewerCard" hidden>
+      <div class="row space-between">
+        <h2 class="h2" id="viewerTitle">Visualizar</h2>
+        <button class="btn ghost" id="btnCloseViewer">Fechar</button>
+      </div>
+
+      <!-- PDF -->
+      <div id="pdfBox" class="viewer" hidden>
+        <iframe id="pdfFrame" title="PDF" class="frame"></iframe>
+        <div class="actions">
+          <a class="btn primary" id="btnDownloadPdf" download>Baixar PDF</a>
+          <a class="btn" id="btnOpenPdf" target="_blank" rel="noopener">Abrir em nova aba</a>
+        </div>
+      </div>
+
+      <!-- VIDEO -->
+      <div id="videoBox" class="viewer" hidden>
+        <video id="videoPlayer" class="video" controls playsinline></video>
+        <div class="actions">
+          <a class="btn" id="btnOpenVideo" target="_blank" rel="noopener">Abrir em nova aba</a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span class="tiny muted">Offline: o app abre sem internet, mas PDFs/vídeos dependem de conexão (por padrão).</span>
+    </footer>
+  </main>
+</body>
+</html>
