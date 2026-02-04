@@ -88,7 +88,32 @@ Descrição: Página principal da área de membros (lista de produtos)
     </p>
 
   </main>
+<!--
+POPUP DE INSTALAÇÃO (PWA)
+Ele aparece sempre que abrir, enquanto o app não estiver instalado
+-->
+<div id="installModal" class="install-modal" aria-hidden="true">
+  <div class="install-box">
+    <button id="installClose" class="install-close" aria-label="Fechar">×</button>
 
+    <div class="install-title">Instale o aplicativo</div>
+    <div class="install-text">
+      Instale para acessar mais rápido e usar mesmo sem internet.
+    </div>
+
+    <button id="installBtn" class="install-btn" disabled>
+      Instalar agora
+    </button>
+
+    <!-- Mensagem para iPhone/iOS (Safari) -->
+    <div id="iosHint" class="install-ios-hint" hidden>
+      No iPhone: toque em <b>Compartilhar</b> e depois em <b>Adicionar à Tela de Início</b>.
+    </div>
+  </div>
+</div>
+
+  
   <script src="/js/app.js"></script>
 </body>
+
 </html>
