@@ -4,21 +4,22 @@ Local: /service-worker.js
 Descrição: Offline robusto (app shell pré-cache + PDFs sob demanda)
 */
 
-const CACHE_VERSION = 'v4';
+const CACHE_VERSION = 'v5';
 const APP_SHELL_CACHE = `tribo-shell-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `tribo-runtime-${CACHE_VERSION}`;
 
-// Só o essencial para o app abrir offline
 const APP_SHELL = [
   '/',                 // importante para navegação
   '/index.html',
   '/css/style.css',
   '/js/app.js',
   '/manifest.json',
+
+  // Ícones do PWA
   '/images/icons/icon-192.png',
   '/images/icons/icon-512.png',
 
-  // Imagens dos cards (opcional, mas ajuda muito)
+  // Imagens dos cards
   '/images/capa-davi.jpg',
   '/images/capa-golias.jpg',
 ];
@@ -49,7 +50,7 @@ self.addEventListener('fetch', (event) => {
   const req = event.request;
   const url = new URL(req.url);
 
-  // 1) Navegação (abrir o app): devolve index.html do cache quando offline
+  // 1) Navegação (abrir o app): fallback pro index.html do cache quando offline
   if (req.mode === 'navigate') {
     event.respondWith(
       fetch(req).catch(() => caches.match('/index.html'))
@@ -57,10 +58,10 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // 2) Só trata arquivos do seu próprio domínio
+  // Só trata arquivos do seu domínio
   if (url.origin !== location.origin) return;
 
-  // 3) PDFs: cache sob demanda (abre 1x online -> depois abre offline)
+  // 2) PDFs: cache sob demanda (abriu 1x online -> depois abre offline)
   if (url.pathname.endsWith('.pdf')) {
     event.respondWith(
       caches.open(RUNTIME_CACHE).then(async (cache) => {
@@ -72,7 +73,7 @@ self.addEventListener('fetch', (event) => {
           cache.put(req, fresh.clone());
           return fresh;
         } catch (e) {
-          // Se nunca abriu online, não existe no cache
+          // Se nunca abriu online, não vai existir no cache
           return cached || Response.error();
         }
       })
@@ -80,18 +81,19 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // 4) Imagens/CSS/JS: cache-first (rápido e offline-friendly)
+  // 3) Assets (CSS/JS/imagens): cache-first, com fallback
   event.respondWith(
     caches.match(req).then((cached) => {
-      return (
-        cached ||
-        fetch(req).then((fresh) => {
-          return caches.open(RUNTIME_CACHE).then((cache) => {
+      if (cached) return cached;
+
+      return fetch(req)
+        .then((fresh) =>
+          caches.open(RUNTIME_CACHE).then((cache) => {
             cache.put(req, fresh.clone());
             return fresh;
-          });
-        }).catch(() => cached)
-      );
+          })
+        )
+        .catch(() => cached);
     })
   );
 });
