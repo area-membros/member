@@ -107,12 +107,21 @@ h1 {
   color: #fff;
 }
 
-.support {
-  margin-top: 30px;
-  font-size: 13px;
+.footer-feedback {
+  margin-top: 32px;
+  font-size: 12px;
   color: #777;
   text-align: center;
+}
 
+.footer-feedback a {
+  color: #aaa;
+  text-decoration: underline;
+  margin-left: 4px;
+}
+
+.footer-feedback a:hover {
+  color: #fff;
 }
 
 
@@ -192,3 +201,4 @@ h1 {
   padding: 10px;
   border-radius: 12px;
 }
+
